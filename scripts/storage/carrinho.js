@@ -50,7 +50,7 @@ function removerProdutoCarrinho(produtoId){
     }
 }
 
-function alterarTotalProduto(produtoId,quantidadeParaAlterar){
+function alterarTotalProduto(produtoId,quantidadeParaAlterar,incOne){
     let carrinho = getCarrinho()
 
     if(!Array.isArray(carrinho)){
@@ -60,8 +60,24 @@ function alterarTotalProduto(produtoId,quantidadeParaAlterar){
     const index = carrinho.findIndex(c=>c.id==produtoId)
 
     if(index!== -1){
-        alterarEstoqueProduto(produtoId,carrinho[index].total)
-        carrinho[index].total=carrinho[index].total+parseInt(quantidadeParaAlterar)
+
+        const produto = getProduto(produtoId)
+
+
+        const totalItensAntigo=carrinho[index].total;
+        let totalItensNovo = carrinho[index].total+parseInt(quantidadeParaAlterar)
+        if(!incOne){
+            totalItensNovo=parseInt(quantidadeParaAlterar)
+        }
+        let novoEstoque = produto.estoque + totalItensAntigo - totalItensNovo
+
+        if(novoEstoque<0){
+            toastr.error("Não é possível alterar a quantidade de produtos no carrinho, o produto não possui estoque para a quantidade desejada!")
+            return
+        }
+
+        alterarEstoqueProduto(produtoId,totalItensAntigo)
+        carrinho[index].total=totalItensNovo
         alterarEstoqueProduto(produtoId,-carrinho[index].total)
         if(carrinho[index].total==0){
             carrinho.splice(index,1)
