@@ -3,7 +3,7 @@ window.addEventListener("load", myInit, true); function myInit(){
 
     primeiroCarregamentoCategorias()
     primeiroCarregamentoProdutos()
-
+    popularFiltrosCategoria()
     popularRandomProdutos()
 }; 
 
@@ -17,4 +17,18 @@ function popularRandomProdutos(){
     randomProdutos.forEach((produto)=>{
         gerarCardProduto(produto)
     })
+}
+
+
+
+function popularFiltrosCategoria(){
+
+    const categorias = getCategorias()
+
+
+    categorias.forEach((cat)=>{
+
+        gerarCheckFiltroCategoria(cat)
+    })
+
 }
