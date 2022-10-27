@@ -15,3 +15,6 @@ const carrinhoContainer = document.getElementById('containerProdutosCarrinho')
 const totalItensElem = document.getElementById('totalItensCarrinho')
 const valorTotalElem = document.getElementById('valorTotalCarrinho')
 const totalCarrinhoMenu = document.getElementById('totalCarrinho')
+
+
+
