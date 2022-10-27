@@ -232,6 +232,25 @@ function primeiroCarregamentoProdutos(){
 }
 
 
+function getProduto(id){
+    let produtos = getProdutos();
+    return produtos.find((c)=>c.id===id);
+}
+
+function decrementarEstoqueProduto(id,quantidade){
+    const produtos = getProdutos();
+    const index = produtos.findIndex(p=>p.id==id)
+    produtos[index].estoque = produtos[index].estoque - quantidade;
+    localStorage.setItem(produtosKey,JSON.stringify(produtos))
+}
+function incrementarEstoqueProduto(id,quantidade){
+    const produtos = getProdutos();
+    const index = produtos.findIndex(p=>p.id==id)
+    produtos[index].estoque = produtos[index].estoque + quantidade;
+    localStorage.setItem(produtosKey,JSON.stringify(produtos))
+}
+
+
 function getProdutos(){
     let produtos = JSON.parse(localStorage.getItem(produtosKey))
 
