@@ -1,5 +1,4 @@
 
-    const containerProdutos = document.getElementById('containerProdutos')
 
 
 function gerarCardProduto(produto) {
