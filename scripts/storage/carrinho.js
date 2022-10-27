@@ -25,7 +25,7 @@ function addProdutoCarrinho (produtoId){
         produto.total = 1
         carrinho.push(produto)
     }
-    decrementarEstoqueProduto(produtoId,1)
+   alterarEstoqueProduto(produtoId,-1)
     localStorage.setItem(carrinhoKey,JSON.stringify(carrinho))
 }
 
@@ -40,7 +40,7 @@ function removerProdutoCarrinho(produtoId){
     const index = carrinho.findIndex(c=>c.id==produtoId)
 
     if(index!== -1){
-        incrementarEstoqueProduto(produtoId,carrinho[index].total)
+        alterarEstoqueProduto(produtoId,carrinho[index].total)
         carrinho.splice(index, 1)
         localStorage.setItem(carrinhoKey,JSON.stringify(carrinho))
         refreshCarrinhoInfos()
@@ -49,6 +49,32 @@ function removerProdutoCarrinho(produtoId){
         toastr.error("Ops não foi possível identificar o item a ser removido");
     }
 }
+
+function alterarTotalProduto(produtoId,quantidadeParaAlterar){
+    let carrinho = getCarrinho()
+
+    if(!Array.isArray(carrinho)){
+        carrinho=[]
+    }
+
+    const index = carrinho.findIndex(c=>c.id==produtoId)
+
+    if(index!== -1){
+        alterarEstoqueProduto(produtoId,carrinho[index].total)
+        carrinho[index].total=carrinho[index].total+parseInt(quantidadeParaAlterar)
+        alterarEstoqueProduto(produtoId,-carrinho[index].total)
+        if(carrinho[index].total==0){
+            carrinho.splice(index,1)
+        }
+        localStorage.setItem(carrinhoKey,JSON.stringify(carrinho))
+        refreshCarrinhoInfos()
+    }
+    else{
+        toastr.error("Ops não foi possível identificar o item a ser alterado");
+    }
+}
+
+
 
 
 function getCarrinho(){
