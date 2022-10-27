@@ -15,6 +15,8 @@ function gerarCardProduto(produto) {
   const cardProduto = `
     <div class="col-12 col-md-3 m-1">
       <div class="card">
+      <img class="card-img-top" src="${produto.img}" alt="Card image cap">
+
         <div class="card-body">
           <h5 class="card-title">${produto.descricao}</h5>
           <h6 class="card-subtitle mb-2 text-muted">Categoria : ${categoriaNome}</h6>
