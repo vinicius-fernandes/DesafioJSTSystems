@@ -19,7 +19,7 @@ function gerarCardProduto(produto) {
           <h5 class="card-title">${produto.descricao}</h5>
           <h6 class="card-subtitle mb-2 text-muted">Categoria : ${categoriaNome}</h6>
           <p class="card-text">Valor: R$ ${produto.valor}</p>
-          <a href="#" class="btn btn-success" onclick="addProdutoCarrinho(${produto.id})">Adicionar ao carrinho</a>
+          <button  class="btn btn-success" onclick="addProdutoCarrinho(${produto.id})">Adicionar ao carrinho</button>
         </div>
       </div>
     </div>

@@ -1,5 +1,17 @@
 const carrinhoKey = "CARRINHO"
 
+function getTotalItensCompra(){
+    const carrinho = getCarrinho()
+    const total = carrinho.reduce((prev,curr)=>prev+curr.total,0)
+    return total
+}
+
+function getValorTotalCompra(){
+    const carrinho = getCarrinho()
+    const total = carrinho.reduce((prev,curr)=>prev+(curr.total*curr.valor),0)
+    return total
+}
+
 
 function addProdutoCarrinho (produtoId){
     const produto = getProduto(produtoId)
@@ -27,6 +39,8 @@ function addProdutoCarrinho (produtoId){
     }
    alterarEstoqueProduto(produtoId,-1)
     localStorage.setItem(carrinhoKey,JSON.stringify(carrinho))
+    toastr.success(`O produto ${produto.descricao} foi adicionado ao carrinho`);
+    checkTotalItensCarrinho()
 }
 
 
@@ -44,6 +58,8 @@ function removerProdutoCarrinho(produtoId){
         carrinho.splice(index, 1)
         localStorage.setItem(carrinhoKey,JSON.stringify(carrinho))
         refreshCarrinhoInfos()
+        toastr.success(`O produto foi removido do carrinho`);
+
     }
     else{
         toastr.error("Ops não foi possível identificar o item a ser removido");
@@ -68,6 +84,11 @@ function alterarTotalProduto(produtoId,quantidadeParaAlterar,incOne){
         let totalItensNovo = carrinho[index].total+parseInt(quantidadeParaAlterar)
         if(!incOne){
             totalItensNovo=parseInt(quantidadeParaAlterar)
+            if(totalItensNovo<0){
+                toastr.error("A quantidade de itens informada deve ser maior que 0 :)");
+                return;
+
+            }
         }
         let novoEstoque = produto.estoque + totalItensAntigo - totalItensNovo
 
@@ -84,6 +105,8 @@ function alterarTotalProduto(produtoId,quantidadeParaAlterar,incOne){
         }
         localStorage.setItem(carrinhoKey,JSON.stringify(carrinho))
         refreshCarrinhoInfos()
+        toastr.success(`Agora o carrinho possui ${totalItensNovo} unidades do produto ${produto.descricao}`);
+
     }
     else{
         toastr.error("Ops não foi possível identificar o item a ser alterado");

@@ -13,7 +13,7 @@ function gerarCardProdutoCarrinho(produtoCarrinho){
         <button class="btn btn-dark btn-sm rounded-circle m-1" onclick="alterarTotalProduto(${produtoCarrinho.id},1,true)"><i class="bi bi-arrow-up"></i></button>
         </div>
         <p class="card-text">Valor unitário: R$ ${produtoCarrinho.valor} | Valor total: R$ ${(produtoCarrinho.total)*(produtoCarrinho.valor)}</p>
-        <a href="#" class="btn btn-danger" onclick="removerProdutoCarrinho(${produtoCarrinho.id})"><i class="bi bi-trash"></i></a>
+        <button class="btn btn-danger" onclick="removerProdutoCarrinho(${produtoCarrinho.id})"><i class="bi bi-trash"></i></button>
  
   </div>
     `

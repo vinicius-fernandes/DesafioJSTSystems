@@ -5,6 +5,7 @@ window.addEventListener("load", myInit, true); function myInit(){
     primeiroCarregamentoProdutos()
     popularFiltrosCategoria()
     popularRandomProdutos()
+    checkTotalItensCarrinho()
 }; 
 
 
@@ -21,6 +22,9 @@ function popularRandomProdutos(){
 
 
 
+
+
+
 function popularFiltrosCategoria(){
 
     const categorias = getCategorias()
@@ -31,4 +35,15 @@ function popularFiltrosCategoria(){
         gerarCheckFiltroCategoria(cat)
     })
 
+}
+
+function checkTotalItensCarrinho(){
+    const itensNoCarrinho = getTotalItensCompra()
+
+    if(itensNoCarrinho>0){
+        let text = `(${itensNoCarrinho})`
+    
+
+        totalCarrinhoMenu.innerText=text
+    }
 }

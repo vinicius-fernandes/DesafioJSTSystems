@@ -13,10 +13,7 @@ function popularCarrinho(){
 
 
 function totalItensCompra(){
-    const carrinho = getCarrinho()
-    const total = carrinho.reduce((prev,curr)=>prev+curr.total,0)
-
-    totalItensElem.innerText=total
+    totalItensElem.innerText=getTotalItensCompra()
 }
 function valorTotalCompra(){
     const carrinho = getCarrinho()
